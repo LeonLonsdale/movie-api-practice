@@ -13,12 +13,27 @@ export const createOne = (Model) =>
     });
   });
 
+export const getOne = (Model) =>
+  catchAsync(async (req, res, next) => {
+    const document = await Model.findById(req.params.id);
+
+    if (!document) return next(new AppError('No movie found for that ID', 404));
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        document,
+      },
+    });
+  });
+
 export const getAll = (Model) =>
   catchAsync(async (req, res, next) => {
     const document = await Model.find();
 
     res.status(200).json({
       status: 'success',
+      results: document.length,
       data: {
         document,
       },
