@@ -1,5 +1,5 @@
 import {Movie} from './../models/movieSchema.js';
-import {catchAsync} from './../util/catchAsync.js';
+// import {catchAsync} from './../util/catchAsync.js';
 import {createOne, getAll, getOne, updateOne, deleteOne} from './handlerFactory.js';
 
 export const createMovie = createOne(Movie);
