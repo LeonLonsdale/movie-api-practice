@@ -17,6 +17,12 @@ const movieSchema = new mongoose.Schema({
   releaseDate: {
     type: Date,
   },
+  storyline: {
+    type: String,
+  },
+  certificate: {
+    type: Number,
+  },
 });
 
 movieSchema.index({title: 1, releaseYear: 1}, {unique: true});
