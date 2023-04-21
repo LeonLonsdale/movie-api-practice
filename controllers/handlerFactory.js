@@ -1,4 +1,4 @@
-import {catchAsync} from './../util/catchAsync.js';
+import { catchAsync } from './../util/catchAsync.js';
 import AppError from './../util/appError.js';
 
 export const createOne = (Model) =>
@@ -47,7 +47,8 @@ export const updateOne = (Model) =>
       runValidators: true,
     });
 
-    if (!document) return next(new AppError('No document found with that ID', 404));
+    if (!document)
+      return next(new AppError('No document found with that ID', 404));
 
     res.status(200).json({
       status: 'success',
@@ -61,7 +62,8 @@ export const deleteOne = (Model) =>
   catchAsync(async (req, res, next) => {
     const document = await Model.findByIdAndDelete(req.params.id);
 
-    if (!document) return next(new AppError('No document found with that ID', 404));
+    if (!document)
+      return next(new AppError('No document found with that ID', 404));
 
     res.status(204).json({
       status: 'success',

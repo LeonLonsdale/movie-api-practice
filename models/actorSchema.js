@@ -14,6 +14,6 @@ const actorSchema = new mongoose.Schema({
   },
 });
 
-actorSchema.index({name: 1, dateOfBirth: 1}, {unique: true});
+actorSchema.index({ name: 1, dateOfBirth: 1 }, { unique: true });
 
 export const Actor = mongoose.model('Actor', actorSchema);

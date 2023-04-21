@@ -25,6 +25,6 @@ const movieSchema = new mongoose.Schema({
   },
 });
 
-movieSchema.index({title: 1, releaseYear: 1}, {unique: true});
+movieSchema.index({ title: 1, releaseYear: 1 }, { unique: true });
 
 export const Movie = mongoose.model('Movie', movieSchema);

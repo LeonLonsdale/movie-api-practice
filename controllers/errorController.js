@@ -27,7 +27,9 @@ const sendProdError = (err, res) => {
 const handleValidationError = (err) => {
   console.log('Handling Validation Error');
   const errors = Object.values(err.errors).map((er) => er.message);
-  const message = `Your request encountered the following errors: ${errors.join(', ')}`;
+  const message = `Your request encountered the following errors: ${errors.join(
+    ', '
+  )}`;
   console.log('handled');
   return new AppError(message, 400);
 };

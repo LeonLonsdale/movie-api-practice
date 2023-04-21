@@ -1,5 +1,11 @@
-import {Actor} from './../models/actorSchema.js';
-import {createOne, getOne, getAll, updateOne, deleteOne} from './handlerFactory.js';
+import { Actor } from './../models/actorSchema.js';
+import {
+  createOne,
+  getOne,
+  getAll,
+  updateOne,
+  deleteOne,
+} from './handlerFactory.js';
 
 export const createActor = createOne(Actor);
 export const getActor = getOne(Actor);
