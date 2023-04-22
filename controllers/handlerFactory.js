@@ -31,7 +31,7 @@ export const getAll = (Model) =>
   catchAsync(async (req, res, next) => {
     let filter = {};
     if (req.params.actorId) filter = { actors: req.params.actorId };
-    if (req.params.movieId) filter = { roles: req.params.movieId };
+    if (req.params.movieId) filter = { movies: req.params.movieId };
     const document = await Model.find(filter);
 
     res.status(200).json({

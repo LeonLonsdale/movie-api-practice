@@ -17,7 +17,7 @@ export const updateMovie = updateOne(Movie);
 export const deleteMovie = deleteOne(Movie);
 
 export const addActorToMovie = catchAsync(async (req, res, next) => {
-  const movie = await Movie.findById(req.params.id);
+  const movie = await Movie.findById(req.params.movieId);
   if (!movie) return next(new AppError('Movie not found.', 404));
 
   let actor;

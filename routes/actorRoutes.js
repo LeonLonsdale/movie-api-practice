@@ -15,7 +15,7 @@ export const router = express.Router();
 
 router.route('/').post(createActor).get(getAllActors);
 router.route('/:id').get(getActor).patch(updateActor).delete(deleteActor);
-router.route('/:id/movies').get(getAllMovies).patch(addMovieToActor);
+router.route('/:actorId/movies').get(getAllMovies).patch(addMovieToActor);
 
 // /actors/actorId/movies
 // router.use('/:actorId/movies', movieRouter);
