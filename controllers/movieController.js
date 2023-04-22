@@ -6,6 +6,7 @@ import {
   getOne,
   updateOne,
   deleteOne,
+  manyToMany,
 } from './handlerFactory.js';
 
 export const createMovie = createOne(Movie);

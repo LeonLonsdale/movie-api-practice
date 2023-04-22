@@ -75,3 +75,37 @@ export const deleteOne = (Model) =>
       },
     });
   });
+
+export const manyToMany = (ParentModel, ChildModel) =>
+  catchAsync(async (req, res, next) => {
+    const parentType = ParentModel.collection.collectionName.slice(0, -1);
+    const childType = ChildModel.collection.collectionName.slice(0, -1);
+
+    const parentDocument = await ParentModel.findById(req.params.id);
+
+    if (!parentDocument)
+      return next(new AppError(`Unable to find that ${parentType}`, 404));
+
+    let childDocument;
+    if (req.body.id) {
+      childDocument = await ChildModel.findById(req.body.id);
+    } else if (req.body.name) {
+      childDocument = await ChildModel.findOne({ name: req.body.name });
+    }
+
+    if (!childDocument)
+      return next(new AppError(`Unable to find that ${childType}`));
+
+    parentDocument.roles.push(childDocument._id);
+    childDocument.actors.push(parentDocument._id);
+
+    await parentDocument.save();
+    await childDocument.save();
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        parentDocument,
+      },
+    });
+  });

@@ -6,7 +6,7 @@ actors: reference ID
 */
 
 const movieSchema = new mongoose.Schema({
-  title: {
+  name: {
     type: String,
     required: [true, 'A movie title is required'],
   },
@@ -31,6 +31,6 @@ const movieSchema = new mongoose.Schema({
   ],
 });
 
-movieSchema.index({ title: 1, releaseYear: 1 }, { unique: true });
+movieSchema.index({ name: 1, releaseYear: 1 }, { unique: true });
 
 export const Movie = mongoose.model('Movie', movieSchema);
