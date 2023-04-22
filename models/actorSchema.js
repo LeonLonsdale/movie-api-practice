@@ -12,6 +12,12 @@ const actorSchema = new mongoose.Schema({
     type: Date,
     required: [true, 'An actor must have a date of birth'],
   },
+  roles: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Movie',
+    },
+  ],
 });
 
 actorSchema.index({ name: 1, dateOfBirth: 1 }, { unique: true });

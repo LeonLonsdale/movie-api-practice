@@ -23,6 +23,12 @@ const movieSchema = new mongoose.Schema({
   certificate: {
     type: Number,
   },
+  actors: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Actor',
+    },
+  ],
 });
 
 movieSchema.index({ title: 1, releaseYear: 1 }, { unique: true });
