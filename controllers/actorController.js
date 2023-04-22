@@ -23,24 +23,21 @@ export const addMovieToActor = catchAsync(async (req, res, next) => {
   if (!actor) return next(new AppError('Actor not found', 404));
 
   let movie;
-  if (!req.body.movieName && !req.body.movieId)
-    return next(new AppError('You must provide a movie name or ID', 404));
-
-  if (req.body.movieName && !req.body.movieId) {
-    movie = await Movie.findOne({ title: req.body.movieName });
-  }
 
   if (req.body.movieId) {
     movie = await Movie.findById(req.body.movieId);
+  } else if (req.body.movieName) {
+    movie = await Movie.findOne({ title: req.body.movieName });
   }
 
-  if (!movie) return next(new AppError('Unable to find that movie', 404));
+  if (!movie)
+    return next(new AppError(`Movie not found. Check the ID/name again`, 404));
 
   actor.roles.push(movie._id);
   movie.actors.push(actor._id);
 
-  actor.save();
-  movie.save();
+  await actor.save();
+  await movie.save();
 
   res.status(200).json({
     status: 'success',
