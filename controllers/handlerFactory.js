@@ -76,36 +76,41 @@ export const deleteOne = (Model) =>
     });
   });
 
-export const manyToMany = (ParentModel, ChildModel) =>
-  catchAsync(async (req, res, next) => {
-    const parentType = ParentModel.collection.collectionName.slice(0, -1);
-    const childType = ChildModel.collection.collectionName.slice(0, -1);
+// export const manyToMany = (ParentModel, ChildModel) =>
+//   catchAsync(async (req, res, next) => {
+//     console.log('Test 1: Enter func');
+//     const parentType = ParentModel.collection.collectionName.slice(0, -1);
+//     const childType = ChildModel.collection.collectionName.slice(0, -1);
 
-    const parentDocument = await ParentModel.findById(req.params.id);
+//     const parentDocument = await ParentModel.findById(req.params.id);
 
-    if (!parentDocument)
-      return next(new AppError(`Unable to find that ${parentType}`, 404));
+//     if (!parentDocument)
+//       return next(new AppError(`Unable to find that ${parentType}`, 404));
 
-    let childDocument;
-    if (req.body.id) {
-      childDocument = await ChildModel.findById(req.body.id);
-    } else if (req.body.name) {
-      childDocument = await ChildModel.findOne({ name: req.body.name });
-    }
+//     console.log('Test 2: Got parent');
 
-    if (!childDocument)
-      return next(new AppError(`Unable to find that ${childType}`));
+//     let childDocument;
+//     if (req.body.id) {
+//       childDocument = await ChildModel.findById(req.body.id);
+//     } else if (req.body.name) {
+//       childDocument = await ChildModel.findOne({ name: req.body.name });
+//     }
 
-    parentDocument.roles.push(childDocument._id);
-    childDocument.actors.push(parentDocument._id);
+//     if (!childDocument)
+//       return next(new AppError(`Unable to find that ${childType}`));
 
-    await parentDocument.save();
-    await childDocument.save();
+//     console.log('Test 3: Got child');
 
-    res.status(200).json({
-      status: 'success',
-      data: {
-        parentDocument,
-      },
-    });
-  });
+//     parentDocument.`${childType}s`.push(childDocument._id);
+//     childDocument.actors.push(parentDocument._id);
+
+//     await parentDocument.save();
+//     await childDocument.save();
+
+//     res.status(200).json({
+//       status: 'success',
+//       data: {
+//         parentDocument,
+//       },
+//     });
+//   });

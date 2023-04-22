@@ -12,7 +12,7 @@ const actorSchema = new mongoose.Schema({
     type: Date,
     required: [true, 'An actor must have a date of birth'],
   },
-  roles: [
+  movies: [
     {
       type: mongoose.Schema.ObjectId,
       ref: 'Movie',
